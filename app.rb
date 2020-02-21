@@ -64,7 +64,7 @@ get "/news" do
         weather_temp_l  = weather_forecast["temperatureLow"]
         
         weather_html = weather_html  + '<div class="card bg-light mb-3" style="max-width: 18rem;">'
-        weather_html = weather_html  + '<div class="card-header">Day</div>'
+        weather_html = weather_html  + '<div class="card-header">' + weather_time.strftime("%a - %F") + '</div>'
         weather_html = weather_html  + '  <div class="card-body">'
         weather_html = weather_html  + '    <img src="/img/' + weather_icon + '.svg">'
         weather_html = weather_html  + '    <h5 class="card-title">' + "#{weather_summary}" + '</h5>'
@@ -74,6 +74,7 @@ get "/news" do
         weather_html = weather_html  + '</div>'
         weather_html = weather_html  + '</div>'
     end
+    @display_weather = weather_html
 
     # -----------------------------------------------
     # Build news
