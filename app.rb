@@ -3,6 +3,7 @@ require "sinatra/reloader"
 require "geocoder"
 require "forecast_io"
 require "httparty"
+require 'time'
 def view(template); erb template.to_sym; end
 before { puts "Parameters: #{params}" }                                     
 
@@ -46,32 +47,30 @@ get "/news" do
     weather_html = weather_html  + '<div class="card bg-light mb-3" style="max-width: 18rem;">'
     weather_html = weather_html  + '<div class="card-header">Today</div>'
     weather_html = weather_html  + '  <div class="card-body">'
-    weather_html = weather_html  + '    <img src="/img/' + weather_icon + '.svg">'
+    weather_html = weather_html  + '    <img src="/img/' + weather_icon + '.svg" style="height: 50%; width: 50%">'
     weather_html = weather_html  + '    <h5 class="card-title">' + "#{weather_summary}" + '</h5>'
     weather_html = weather_html  + '    <p class="card-text">Temp.: ' + "#{weather_temp}" + '</p>'
-    weather_html = weather_html  + '    <p class="card-text">UV Index.: ' + "#{weather_uv}" + '</p>'
+    weather_html = weather_html  + '    <p class="card-text">UV Index: ' + "#{weather_uv}" + '</p>'
     weather_html = weather_html  + '  </div>'
-    weather_html = weather_html  + '</div>'
     weather_html = weather_html  + '</div>'
 
     # -------------------
     # Forecast
     for dforecast in weather_forecast["daily"]["data"]
-        weather_time = weather_forecast["time"]
-        weather_icon = weather_forecast["icon"]
-        weather_summary = weather_forecast["summary"]
-        weather_temp_h  = weather_forecast["temperatureHigh"]
-        weather_temp_l  = weather_forecast["temperatureLow"]
+        weather_time = Time.at(dforecast["time"])
+        weather_icon = dforecast["icon"]
+        weather_summary = dforecast["summary"]
+        weather_temp_h  = dforecast["temperatureHigh"]
+        weather_temp_l  = dforecast["temperatureLow"]
         
         weather_html = weather_html  + '<div class="card bg-light mb-3" style="max-width: 18rem;">'
         weather_html = weather_html  + '<div class="card-header">' + weather_time.strftime("%a - %F") + '</div>'
         weather_html = weather_html  + '  <div class="card-body">'
-        weather_html = weather_html  + '    <img src="/img/' + weather_icon + '.svg">'
+        weather_html = weather_html  + '    <img src="/img/' + "#{weather_icon}" + '.svg" style="height: 50%; width: 50%">'
         weather_html = weather_html  + '    <h5 class="card-title">' + "#{weather_summary}" + '</h5>'
         weather_html = weather_html  + '    <p class="card-text">Temp. High: ' + "#{weather_temp_h}" + '</p>'
         weather_html = weather_html  + '    <p class="card-text">Temp. Low: ' + "#{weather_temp_l}" + '</p>'
         weather_html = weather_html  + '  </div>'
-        weather_html = weather_html  + '</div>'
         weather_html = weather_html  + '</div>'
     end
     @display_weather = weather_html
