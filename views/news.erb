@@ -29,16 +29,64 @@
       </div>
     </div>
     
+    <div class="container">
+      <div class="row">
+        <p>
+            <img src="https://www.countryflags.io/<%=@country_code%>/flat/48.png" style="">
+            &emsp;
+            <h1><%=@location_txt%></h1>
+        </p>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row"><p></p></div>
+    </div>
+
     <!-- Weather forecast -->
+    <div class="container">
+        <div class="row">      
+            <p><h2 class="headline"><b>Weather</b></h2></p>
+        </div>
+    </div>
+
 	<div class="container">
         <div class="row">
-            <%=@display_weather%>
+            <p><%=@display_weather%></p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row"><p></p></div>
+        <div class="row">
+            <p><a href="../" class="btn btn-primary btn" role="button">Back</a></p>
+        </div>
+    </div>
+
+    <div class="container">
+      <div class="row"><hr></div>
+    </div>
+
+	<!-- News -->
+    <div class="container">
+        <div class="row">    
+            <p><h2 class="headline"><b>News</b></h2></p>
         </div>
     </div>
     
-	<!-- News -->
-    <div class="container mt-5">
-		
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p><%=@display_news%></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row"><p></p></div>
+        <div class="row">
+            <p><a href="../" class="btn btn-primary" role="button">Back</a></p>
+        </div>
     </div>
 
     <!-- Optional JavaScript -->

@@ -2,6 +2,29 @@ body {
     font-family: 'Raleway', sans-serif;
 }
 
+h2.headline {
+  width:100%;
+  border-bottom: solid 1px #666;
+}
+
+.card-header {
+    text-align: center;
+    font-weight: bold;
+}
+
+.card-title {
+    font-size: 1.0em;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 0.9em;
+}
+
+.col-md-2{
+      padding: 4px;
+    }
+
 .jumbotron-wfont {
 	color: black;
 }
