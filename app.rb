@@ -12,11 +12,12 @@ ForecastIO.api_key = "2f5cea499b11e77ad6b3da05cd73855c"
 news_key = "c1fd44e73a4d4b6f88ca7e816785c864"
 news_url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=" + news_key
 
-
+# Page with form
 get "/" do
     view "ask"
 end
 
+# Page with results
 get "/news" do
     # Find the location coordinates
     results = Geocoder.search(params["set_location"])
@@ -100,6 +101,8 @@ get "/news" do
         weather_html = weather_html  + '</div>'
         weather_html = weather_html  + '</div>'
     end
+
+    # Save weather html block
     @display_weather = weather_html
 
     # -----------------------------------------------
@@ -107,8 +110,10 @@ get "/news" do
     # -----------------------------------------------
     news_html = ""
     
+    # Check if there are news
     if news_data["totalResults"]>0
 
+        # Open accordion
         news_html = news_html + '<div id="accordion">'
 
         c = 0
@@ -161,9 +166,11 @@ get "/news" do
             news_html = news_html + '<div class="row"><p></p></div>'
         end
 
+        # Close accordion
         news_html = news_html + '</div>'
     end
 
+    # Save News html block
     @display_news = news_html
 
     view "news"
